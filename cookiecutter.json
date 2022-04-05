@@ -2,6 +2,7 @@
     "project_name": "Project Name",
     "package_name": "package_name",
     "repo_name": "repo-name",
+    "location_name": "LocationName",
     "description": "Short description of project.",
     "year": "2022",
     "keywords": "ftrack"
