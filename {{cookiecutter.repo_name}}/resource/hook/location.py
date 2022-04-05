@@ -16,6 +16,7 @@ dependencies_directory = os.path.abspath(
 )
 sys.path.append(dependencies_directory)
 
+logger = logging.getLogger('ftrack-connect.location.{{cookiecutter.package_name}}')
 
 # Pick the current folder location name.
 this_dir = os.path.abspath(os.path.dirname(__file__))
@@ -34,7 +35,7 @@ mount_points = {
 def configure_location(session, event):
     '''Configure locations for *session* and *event*.'''
 
-    logging.info('Configuring location....')
+    logger.info('Configuring location....')
 
     # Ensure environment variables options are available in event.
     if 'options' not in event['data']:
@@ -73,12 +74,11 @@ def configure_location(session, event):
     # Set priority.
     my_location.priority = 30
 
-    logging.info('Setting {} to {}'.format(structure, my_location))
+    logger.info('Setting {} to {}'.format(structure, my_location))
 
 
 def register(api_object):
     '''Register plugin with *api_object*.'''
-    logger = logging.getLogger('ftrack-connect.location.register')
 
     # Validate that session is an instance of ftrack_api.Session. If not, assume
     # that register is being called from an old or incompatible API and return
@@ -113,14 +113,15 @@ def register(api_object):
         priority=0,
     )
 
+    logger.debug('Location {{cookiecutter.package_name}} configured.')
+
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
     # Remember, in version version 2.0 of the ftrack-python-api the default
     # behavior will change from True to False.
     session = ftrack_api.Session(auto_connect_event_hub=True)
     register(session)
-    logging.info(
+    logger.info(
         'Registered location {} and listening'
         ' for events. Use Ctrl-C to abort.'.format({{cookiecutter.location_name}}Structure.name)
     )
