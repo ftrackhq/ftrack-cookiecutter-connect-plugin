@@ -22,6 +22,7 @@ this_dir = os.path.abspath(os.path.dirname(__file__))
 
 from {{cookiecutter.package_name}}.accessor import {{cookiecutter.location_name}}Accessor
 from {{cookiecutter.package_name}}.structure import {{cookiecutter.location_name}}Structure
+from {{cookiecutter.package_name}}.transformer import {{cookiecutter.location_name}}Transformer
 
 
 mount_points = {
@@ -53,6 +54,7 @@ def configure_location(session, event):
 
     structure = {{cookiecutter.location_name}}Structure()
     accessor = {{cookiecutter.location_name}}Accessor(mount_point)
+    transformer = {{cookiecutter.location_name}}Transformer(session)
 
     # Ensure new location.
     my_location = session.ensure('Location', {'name': structure.name})
@@ -64,6 +66,9 @@ def configure_location(session, event):
 
     # Set accessor.
     my_location.accessor = accessor
+
+    # set transformer
+    my_location.resource_identifier_transformer = transformer
 
     # Set priority.
     my_location.priority = 30
