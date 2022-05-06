@@ -14,7 +14,7 @@ First make sure you have cookiecutter installed::
 
 Then generate your project from this template (in your current directory)::
 
-    cookiecutter https://bitbucket.org/ftrack-integrations/ftrack-cookiecutter-connect-plugin.git
+    cookiecutter https://bitbucket.org/ftrack-integrations/ftrack-cookiecutter-connect-plugin.git -c location
 
 Once the project is create you should initialise a local git repo with::
 
